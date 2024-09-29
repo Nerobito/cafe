@@ -1,11 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Hostname } from '../config';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     checkLoginStatus();
@@ -21,6 +23,7 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
     }
   };
+ 
 
   const login = async (username, password) => {
     try {
@@ -51,6 +54,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
     setUser(null);
     localStorage.removeItem('user');
+    navigate('/');
   };
 
   return (

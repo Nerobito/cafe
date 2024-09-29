@@ -10,6 +10,8 @@ const CustomNavbar = () => {
     logout();
   };
 
+  const isAdmin = user && user.role === 'admin';
+
   return (
     <Navbar bg="success" variant="light" expand="lg" sticky="top">
       <Container>
@@ -24,8 +26,14 @@ const CustomNavbar = () => {
           <Nav>
             {isLoggedIn ? (
               <NavDropdown title={user.username} id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/dashboard">Dashboard</NavDropdown.Item>
+               
+
+                {isAdmin ? (
+                  <NavDropdown.Item as={Link} to="/admin">Admin </NavDropdown.Item>
+                ) : (
+                  <NavDropdown.Item as={Link} to="/profile">User </NavDropdown.Item>
+                )}
+
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
