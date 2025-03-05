@@ -29,43 +29,16 @@ if ($result->num_rows === 0) {
 $row = $result->fetch_assoc();
 
 if (password_verify($password, $row['password'])) {
-    // Start the session
-    session_start();
-
-    // Set session variables
-    $_SESSION['user_id'] = $row['id'];
-    $_SESSION['username'] = $row['username'];
-    $_SESSION['role'] = $row['role']; // Add role to session
-
-    // Set a session cookie
-    $session_name = session_name();
-    $session_id = session_id();
-    setcookie($session_name, $session_id, time() + 3600, '/', '', true, true);
-
-    // Check if the user is admin
-    if ($row['role'] === 'admin') {
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Login successful - Admin access',
-            'user' => [
-                'id' => $row['id'],
-                'username' => $row['username'],
-                'role' => $row['role']
-            ]
-        ]);
-        // Redirect to admin page (if necessary)
-        // header('Location: admin_dashboard.php');
-    } else {
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Login successful',
-            'user' => [
-                'id' => $row['id'],
-                'username' => $row['username'],
-                'role' => $row['role']
-            ]
-        ]);
-    }
+    echo json_encode([
+        'status' => 'success',
+        'message' => 'Login successful',
+        'user' => [
+            'userID' => $row['userID'],
+            'username' => $row['username'],
+            'profileImage' => $row['profileImage'],
+            'role' => $row['role']
+        ]
+    ]);
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Login failed']);
 }

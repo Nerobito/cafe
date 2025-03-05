@@ -21,7 +21,6 @@ const CustomNavbar = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/cafe">Cafe</Nav.Link>
-            <Nav.Link as={Link} to="/post">Post</Nav.Link>
           </Nav>
           <Nav>
             {isLoggedIn ? (
@@ -31,7 +30,7 @@ const CustomNavbar = () => {
                 {isAdmin ? (
                   <NavDropdown.Item as={Link} to="/admin">Admin </NavDropdown.Item>
                 ) : (
-                  <NavDropdown.Item as={Link} to="/profile">User </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/user">User </NavDropdown.Item>
                 )}
 
                 <NavDropdown.Divider />
@@ -42,7 +41,6 @@ const CustomNavbar = () => {
                 <Nav.Link as={Link} to="/login">
                   <Button variant="outline-light">Login</Button>
                 </Nav.Link>
-                <Nav.Link as={Link} to="/register" className="text-light">Register</Nav.Link>
               </>
             )}
           </Nav>

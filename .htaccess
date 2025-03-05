@@ -1,0 +1,19 @@
+# ปรับ RewriteBase ถ้าจำเป็น
+RewriteBase /your-project-folder/
+
+# ส่วนอื่นๆ ของ .htaccess ให้คงเดิม
+# ...
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# อนุญาตการเข้าถึง API
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>

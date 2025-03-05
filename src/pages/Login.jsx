@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { AuthContext } from '../context/Authcontext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -13,11 +13,11 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const success = await login(username, password);
+    const success = await login(username, password); 
     if (success) {
-      navigate('/');  // Redirect to home page after successful login
+      navigate('/');  
     } else {
-      setError('Login failed. Please check your credentials.');
+      setError('เข้าสู่ระบบล้มเหลว โปรดตรวจสอบชื่อผู้ใช้และรหัสผ่านของคุณ');
     }
   };
 
@@ -25,14 +25,14 @@ function Login() {
     <Container>
       <Row className="justify-content-md-center mt-5">
         <Col xs={12} md={6}>
-          <h2 className="text-center mb-4">Login</h2>
+          <h2 className="text-center mb-4">เข้าสู่ระบบ</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicUsername">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>ชื่อผู้ใช้</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter username"
+                placeholder="กรอกชื่อผู้ใช้"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -40,19 +40,23 @@ function Login() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>รหัสผ่าน</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="กรอกรหัสผ่าน"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </Form.Group>
+
             <Button variant="primary" type="submit" className="w-100">
-              Login
+              เข้าสู่ระบบ
             </Button>
           </Form>
+          <div className="text-center mt-3">
+            <Link to="/register">ยังไม่มีบัญชี? สมัครสมาชิก</Link>
+          </div>
         </Col>
       </Row>
     </Container>
